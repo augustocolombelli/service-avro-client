@@ -26,6 +26,7 @@ class ProductMapperTest {
                 .uuid(UUID.randomUUID())
                 .name("a name")
                 .description("a description")
+                .lastName("a last name")
                 .build();
 
         // when

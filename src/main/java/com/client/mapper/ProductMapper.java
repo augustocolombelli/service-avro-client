@@ -12,6 +12,7 @@ public class ProductMapper {
                 .uuid(UUID.fromString(String.valueOf(avroProduct.getUuid())))
                 .description(avroProduct.getDescription())
                 .name(String.valueOf(avroProduct.getName()))
+                .lastName(String.valueOf(avroProduct.getLastName()))
                 .build();
     }
 
@@ -20,6 +21,7 @@ public class ProductMapper {
                 .setUuid(product.getUuid().toString())
                 .setName(product.getName())
                 .setDescription(product.getDescription())
+                .setLastName(product.getLastName())
                 .build();
     }
 

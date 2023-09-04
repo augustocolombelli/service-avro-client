@@ -37,7 +37,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'com.service:service-avro-schema:1.0'
+	implementation 'com.service:service-avro-schema:1.1'
 	implementation "org.apache.avro:avro:1.11.0"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

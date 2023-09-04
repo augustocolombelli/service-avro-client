@@ -12,5 +12,6 @@ public class Product {
     UUID uuid;
     String name;
     String description;
+    String lastName;
 
 }
