@@ -1,12 +1,14 @@
 package com.client.mapper;
 
 import com.client.domain.Product;
+import org.apache.avro.AvroMissingFieldException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProductMapperTest {
 
@@ -30,7 +32,7 @@ class ProductMapperTest {
         com.avro.Product actualAvroProduct = productMapper.toAvro(aProduct);
 
         // then
-        assertThat(aProduct.getUuid().toString()).isEqualTo(actualAvroProduct.getUuid().toString());
+        assertThat(aProduct.getUuid().toString()).hasToString(actualAvroProduct.getUuid().toString());
         assertThat(aProduct.getName()).isEqualTo(actualAvroProduct.getName().toString());
         assertThat(aProduct.getDescription()).isEqualTo(actualAvroProduct.getDescription());
     }
@@ -48,9 +50,32 @@ class ProductMapperTest {
         Product actualProduct = productMapper.toDomain(aAvroProduct);
 
         // then
-        assertThat(aAvroProduct.getUuid().toString()).isEqualTo(actualProduct.getUuid().toString());
+        assertThat(aAvroProduct.getUuid().toString()).hasToString(actualProduct.getUuid().toString());
         assertThat(aAvroProduct.getName()).isEqualTo(actualProduct.getName());
         assertThat(aAvroProduct.getDescription()).isEqualTo(actualProduct.getDescription());
+    }
+
+
+    @Test
+    void aAvroProductWithoutName_throwsAvroMissingFieldException(){
+        // given
+        com.avro.Product.Builder avroProductBuilder = com.avro.Product.newBuilder()
+                .setUuid(UUID.randomUUID())
+                .setDescription("a description");
+
+        // when then
+        assertThrows(AvroMissingFieldException.class, avroProductBuilder::build);
+    }
+
+    @Test
+    void aAvroProductWithoutUuid_throwsAvroMissingFieldException(){
+        // given
+        com.avro.Product.Builder avroProductBuilder = com.avro.Product.newBuilder()
+                .setName("a name")
+                .setDescription("a description");
+
+        // when then
+        assertThrows(AvroMissingFieldException.class, avroProductBuilder::build);
     }
 
 }
