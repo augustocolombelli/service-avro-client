@@ -7,6 +7,13 @@ plugins {
 group = 'com.client'
 version = '0.0.1-SNAPSHOT'
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+
 java {
 	sourceCompatibility = '17'
 }
@@ -28,7 +35,10 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'com.service:service-avro-schema:0.0.1-SNAPSHOT'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'com.service:service-avro-schema:1.0'
+	implementation "org.apache.avro:avro:1.11.0"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
